@@ -5,10 +5,12 @@
   (newline)
   (display n)
   (start-prime-test n (runtime)))
+
 (define (start-prime-test n start-time)
   (if (prime? n)
       (report-prime (- (runtime) 
                        start-time))))
+
 (define (report-prime elapsed-time)
   (display " *** ")
   (display elapsed-time))
@@ -35,22 +37,11 @@
 
 (define (search-for-primes from n)
   (cond ((> n 0)
-      (if (prime? from)
-          (and
-           (timed-prime-test from)
-           (search-for-primes (next-odd from) (- n 1))
+      (cond ((prime? from)
+             (timed-prime-test from)
+             (search-for-primes (next-odd from) (- n 1))
            )
-          (search-for-primes (next-odd from) n)))))
-
-(define (continue-primes n count)
-    (cond ((= count 0)
-            (display "are primes."))
-          ((prime? n)
-            (display n)
-            (newline)
-            (continue-primes (next-odd n) (- count 1)))
-          (else
-            (continue-primes (next-odd n) count))))
+       (else (search-for-primes (next-odd from) n))))))
 
 (define (next-odd n)
   (if (odd? n)
