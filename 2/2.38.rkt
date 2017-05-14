@@ -9,6 +9,7 @@
 
 (fold-left / 1 (list 1 2 3))
 (/ (/ (/ 1 1) 2) 3)
+
 (fold-left list null (list 1 2 3))
 (list (list (list null 1) 2) 3)
 
